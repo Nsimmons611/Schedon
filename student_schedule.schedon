@@ -1,0 +1,73 @@
+// ============================================================
+// student_schedule.schedon
+// Sample Schedon program demonstrating student and schedule management
+// ============================================================
+
+// Define courses
+course CSC101 {
+  title = "Introduction to Computer Science";
+  credits = 3;
+  prerequisites = [];
+}
+
+course CSC201 {
+  title = "Data Structures";
+  credits = 3;
+  prerequisites = [CSC101];
+}
+
+course MATH151 {
+  title = "Calculus I";
+  credits = 4;
+  prerequisites = [];
+}
+
+// Define major
+major ComputerScience {
+  requiredCourses = [CSC101, CSC201, MATH151];
+}
+
+// Define semesters
+semester fall2025 {
+  year = 2025;
+  term = Fall;
+}
+
+semester spring2026 {
+  year = 2026;
+  term = Spring;
+}
+
+// Create students
+student student1 {
+  name = "John Doe";
+  major = ComputerScience;
+  credits = 0;
+  completedCourses = [];
+}
+
+student student2 {
+  name = "Jane Smith";
+  major = ComputerScience;
+  credits = 7;
+  completedCourses = [CSC101, MATH151];
+}
+
+// Create schedules
+schedule schedule1 {
+  student = student1;
+  semester = fall2025;
+  courses = [CSC101, MATH151];
+}
+
+schedule schedule2 {
+  student = student2;
+  semester = spring2026;
+  courses = [CSC201];
+}
+
+// Display results
+print student1;
+print student2;
+print schedule1;
+print schedule2;
