@@ -13,7 +13,7 @@ public class Schedon {
 
     public static void main(String[] args) throws IOException {
         if (args.length > 1) {
-            System.out.println("Usage: College [script]");
+            System.out.println("Usage: schedon [script.schedon]");
             System.exit(64);
         } else if (args.length == 1) {
             runFile(args[0]);
@@ -31,13 +31,13 @@ public class Schedon {
     private static void runPrompt() throws IOException {
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(input);
-        System.out.println("Welcome to College!");
+        System.out.println("Welcome to Schedon - Academic Schedule Programming Language");
 
         // Use a single Interpreter for the REPL so declarations persist across commands.
         Interpreter interpreter = new Interpreter();
 
         for (;;) {
-            System.out.print("> ");
+            System.out.print("schedon> ");
             String line = reader.readLine();
             if (line == null) {
                 break;

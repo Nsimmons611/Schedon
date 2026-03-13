@@ -2,6 +2,7 @@ package BYOL;
 
 import static BYOL.TokenType.*;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,7 @@ class Parser {
 
     // Student declaration
     Stmt.Student studentDecl() {
-        Token id = consume(IDENTIFIER, "Expect student identifier.");
+        Token id = consume(IDENTIFIER, "Expect student IDENTIFIER.");
         consume(LEFT_BRACE, "Expect '{' after student id.");
 
         String nameValue = null;
@@ -65,11 +66,11 @@ class Parser {
                     nameValue = nameToken.literal.toString();
                     break;
                 case "major":
-                    Token majorToken = consume(IDENTIFIER, "Expect major identifier.");
+                    Token majorToken = consume(IDENTIFIER, "Expect major IDENTIFIER.");
                     majorValue = majorToken.lexeme;
                     break;
                 case "credits":
-                    Token creditsToken = consume(NUMBER, "Expect number of credits.");
+                    Token creditsToken = consume(NUMBER, "Expect NUMBER of credits.");
                     creditsValue = (int)(double)creditsToken.literal;
                     break;
                 case "completedCourses":
@@ -95,7 +96,7 @@ class Parser {
 
     // Course declaration
     Stmt.Course courseDecl() {
-        Token id = consume(IDENTIFIER, "Expect course identifier.");
+        Token id = consume(IDENTIFIER, "Expect course IDENTIFIER.");
         consume(LEFT_BRACE, "Expect '{' after course id.");
 
         String titleValue = null;
@@ -112,7 +113,7 @@ class Parser {
                     titleValue = titleToken.literal.toString();
                     break;
                 case "credits":
-                    Token creditsToken = consume(NUMBER, "Expect number of credits.");
+                    Token creditsToken = consume(NUMBER, "Expect NUMBER of credits.");
                     creditsValue = (int)(double)creditsToken.literal;
                     break;
                 case "prerequisites":
@@ -138,7 +139,7 @@ class Parser {
 
     // Major declaration
     Stmt.Major majorDecl() {
-        Token id = consume(IDENTIFIER, "Expect major identifier.");
+        Token id = consume(IDENTIFIER, "Expect major IDENTIFIER.");
         consume(LEFT_BRACE, "Expect '{' after major id.");
 
         List<String> requiredCourses = new ArrayList<>();
@@ -171,7 +172,7 @@ class Parser {
 
     // Semester declaration
     Stmt.Semester semesterDecl() {
-        Token id = consume(IDENTIFIER, "Expect semester identifier.");
+        Token id = consume(IDENTIFIER, "Expect semester IDENTIFIER.");
         consume(LEFT_BRACE, "Expect '{' after semester id.");
 
         int yearValue = -1;
@@ -187,7 +188,7 @@ class Parser {
                     yearValue = (int)(double)yearToken.literal;
                     break;
                 case "term":
-                    Token termToken = consume(IDENTIFIER, "Expect term identifier (Fall/Spring/Summer).");
+                    Token termToken = consume(IDENTIFIER, "Expect term IDENTIFIER (Fall/Spring/Summer).");
                     termValue = termToken.lexeme;
                     break;
                 default:
@@ -203,7 +204,7 @@ class Parser {
 
     // Schedule declaration
     Stmt.Schedule scheduleDecl() {
-        Token id = consume(IDENTIFIER, "Expect schedule identifier.");
+        Token id = consume(IDENTIFIER, "Expect schedule IDENTIFIER.");
         consume(LEFT_BRACE, "Expect '{' after schedule id.");
 
         String studentId = null;
@@ -246,7 +247,7 @@ class Parser {
 
     // Print statement
     Stmt.Print printStmt() {
-        Token id = consume(IDENTIFIER, "Expect identifier to print.");
+        Token id = consume(IDENTIFIER, "Expect IDENTIFIER to print.");
         consume(SEMICOLON, "Expect ';' after print statement.");
         return new Stmt.Print(id.lexeme);
     }
@@ -274,7 +275,7 @@ class Parser {
                     List<String> list = new ArrayList<>();
                     if (!check(RIGHT_BRACKET)) {
                         do {
-                            Token item = consume(IDENTIFIER, "Expect identifier in array.");
+                            Token item = consume(IDENTIFIER, "Expect IDENTIFIER in array.");
                             list.add(item.lexeme);
                         } while (match(COMMA));
                     }
@@ -366,4 +367,9 @@ class Parser {
         }
     }
 }
+
+
+
+
+
 

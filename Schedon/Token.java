@@ -1,5 +1,6 @@
 package BYOL;
 
+
 public class Token {
     final TokenType type;
     final String lexeme;
@@ -17,3 +18,4 @@ public class Token {
         return type + " " + lexeme + " " + literal;
     }
 }
+

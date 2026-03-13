@@ -1,11 +1,12 @@
 package BYOL;
 
+import static BYOL.TokenType.*;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static BYOL.TokenType.*;
 
 public class Scanner {
     private final String source;
@@ -36,7 +37,7 @@ public class Scanner {
             scanToken();
         }
 
-        tokens.add(new Token(TokenType.EOF, "", null, line));
+        tokens.add(new Token(EOF, "", null, line));
         return tokens;
     }
 
@@ -178,3 +179,5 @@ public class Scanner {
 }
 
     
+
+
