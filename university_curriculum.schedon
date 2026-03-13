@@ -1,0 +1,134 @@
+// ============================================================
+// university_curriculum.schedon
+// Comprehensive university curriculum example
+// ============================================================
+
+// ============ COMPUTER SCIENCE COURSES ============
+course CSC101 {
+  title = "Introduction to Computer Science";
+  credits = 3;
+  prerequisites = [];
+}
+
+course CSC201 {
+  title = "Data Structures";
+  credits = 3;
+  prerequisites = [CSC101];
+}
+
+course CSC301 {
+  title = "Algorithms";
+  credits = 4;
+  prerequisites = [CSC201];
+}
+
+course DBS305 {
+  title = "Database Systems";
+  credits = 3;
+  prerequisites = [CSC201];
+}
+
+// ============ MATHEMATICS COURSES ============
+course MATH151 {
+  title = "Calculus I";
+  credits = 4;
+  prerequisites = [];
+}
+
+course MATH251 {
+  title = "Linear Algebra";
+  credits = 3;
+  prerequisites = [MATH151];
+}
+
+course MATH351 {
+  title = "Discrete Mathematics";
+  credits = 3;
+  prerequisites = [];
+}
+
+// ============ PHYSICS COURSES ============
+course PHYS161 {
+  title = "Physics I";
+  credits = 4;
+  prerequisites = [MATH151];
+}
+
+course PHYS261 {
+  title = "Physics II";
+  credits = 4;
+  prerequisites = [PHYS161];
+}
+
+// ============ MAJORS ============
+major ComputerScience {
+  requiredCourses = [CSC101, CSC201, CSC301, DBS305, MATH151, MATH251, MATH351];
+}
+
+major PhysicsMajor {
+  requiredCourses = [PHYS161, PHYS261, MATH151, MATH251];
+}
+
+// ============ SEMESTERS ============
+semester fall2025 {
+  year = 2025;
+  term = Fall;
+}
+
+semester spring2026 {
+  year = 2026;
+  term = Spring;
+}
+
+semester fall2026 {
+  year = 2026;
+  term = Fall;
+}
+
+// ============ STUDENTS ============
+student cs_student {
+  name = "Alice Johnson";
+  major = ComputerScience;
+  credits = 3;
+  completedCourses = [CSC101];
+}
+
+student physics_student {
+  name = "Bob Wilson";
+  major = PhysicsMajor;
+  credits = 4;
+  completedCourses = [MATH151];
+}
+
+student double_major {
+  name = "Carol White";
+  major = ComputerScience;
+  credits = 10;
+  completedCourses = [CSC101, MATH151, PHYS161];
+}
+
+// ============ SCHEDULES ============
+schedule cs_fall {
+  student = cs_student;
+  semester = fall2025;
+  courses = [CSC201, MATH151];
+}
+
+schedule physics_fall {
+  student = physics_student;
+  semester = fall2025;
+  courses = [PHYS161, MATH251];
+}
+
+schedule double_fall {
+  student = double_major;
+  semester = fall2026;
+  courses = [CSC301, PHYS261];
+}
+
+// ============ OUTPUT ============
+print cs_student;
+print physics_student;
+print double_major;
+print cs_fall;
+print physics_fall;
