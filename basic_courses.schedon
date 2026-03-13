@@ -1,0 +1,59 @@
+// ============================================================
+// basic_courses.schedon
+// Sample Schedon program demonstrating course and major definitions
+// ============================================================
+
+// Core Computer Science Courses
+course CSC101 {
+  title = "Introduction to Computer Science";
+  credits = 3;
+  prerequisites = [];
+}
+
+course CSC201 {
+  title = "Data Structures";
+  credits = 3;
+  prerequisites = [CSC101];
+}
+
+course CSC301 {
+  title = "Algorithms";
+  credits = 4;
+  prerequisites = [CSC101, CSC201];
+}
+
+course CSC401 {
+  title = "Operating Systems";
+  credits = 4;
+  prerequisites = [CSC201];
+}
+
+course DBS305 {
+  title = "Database Systems";
+  credits = 3;
+  prerequisites = [CSC201];
+}
+
+// Mathematics Support Courses
+course MATH151 {
+  title = "Calculus I";
+  credits = 4;
+  prerequisites = [];
+}
+
+course MATH251 {
+  title = "Linear Algebra";
+  credits = 3;
+  prerequisites = [MATH151];
+}
+
+// Define Computer Science Major
+major ComputerScience {
+  requiredCourses = [CSC101, CSC201, CSC301, CSC401, DBS305, MATH151];
+}
+
+// Print all defined courses and majors
+print CSC101;
+print CSC201;
+print CSC301;
+print ComputerScience;
