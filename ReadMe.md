@@ -1,53 +1,136 @@
-Schedon is a domain-specific language (DSL) designed to simplify academic scheduling and student progression tracking. 
-Built to help students by providing an intuitive syntax for modeling courses, majors, prerequisites, and generating valid academic schedules.
+# Schedon: Academic Schedule Programming Language
 
-Features include:
-- Course Management: Define courses with credits and prerequisites
-- Major Definitions: Create majors with required course lists
-- Student Tracking: Model student progress, credits, and completed courses
-- Scheduling: Auto-generate schedules with prerequisite validation
-- Progress Simulation: Simulate semester completion and track graduation eligibility
-- Classification System: Automatic student year classification 
-- Graduation Verification: Check if students meet all requirements
-- Prerequisite Enforcement: Ensures students only enroll in courses they're qualified for
-I have provide a comprehensive ReadMe file demonstrating all features within the zip.
+## Overview
+**Schedon** is a domain-specific programming language (DSL) designed for defining, managing, and querying academic course curricula, student majors, and semester schedules. The language emphasizes clear syntax for educational administrators and academic planners to define complex degree requirements, course prerequisites, and generate student schedules.
 
-To run the Interpreter clone the repository, download the zip, and run java BYOL.Schedon. In the terminal, the functions could be used.
+**File Extension:** `.schedon`
 
-Language Syntax
+## Language Features
 
-student <id> {
-    name = "<full name>";
-    major = <majorId>;
-    credits = <number>;
-    completedCourses = [<courseId1>, <courseId2>, ...];
+### Core Capabilities
+- **Course Management**: Define courses with titles, credit hours, and prerequisite dependencies
+- **Major/Degree Definition**: Specify major programs and their required courses
+- **Student Profiles**: Create student records with completed courses and current major
+- **Semester Planning**: Define academic semesters and term information
+- **Schedule Generation**: Create semester schedules for students while respecting prerequisites
+- **Query Operations**: Print and inspect defined entities
+
+### Non-Trivial Features
+- **Prerequisite Tracking**: Courses maintain dependency graphs; system validates prerequisites
+- **Persistent Environment**: Multiple declarations accumulate state throughout program execution
+- **Context-Aware Scheduling**: Schedules validate student eligibility based on completed courses
+
+## Formal Grammar (BNF/EBNF)
+
+For a complete formal grammar specification, see [GRAMMAR.md](GRAMMAR.md).
+
+### Quick Grammar Overview
+
+## Keywords
+- `course`: Define a course with credits and prerequisites
+- `major`: Define a degree program
+- `student`: Define a student record
+- `semester`: Define an academic semester
+- `schedule`: Define a course schedule
+- `print`: Output entity definitions
+- Built-in functions: `AddCourse()`, `AddMajor()`, `AddStudent()`, etc.
+
+## Data Types
+- **String** (`"text"`): Course names, majors, student names
+- **Number** (integers): Credits, years, grades
+- **List** (`[item1, item2]`): Collections of course IDs
+- **Identifier** (unquoted): Variable names, course IDs (e.g., `CSC101`)
+
+## Running Schedon
+
+### Interactive REPL Mode
+```bash
+java -cp . BYOL.Schedon
+```
+
+Interactive prompt allows you to enter Schedon statements one at a time:
+```
+schedon> course CSC101 { title = "Intro to CS"; credits = 3; prerequisites = []; }
+Course added: Intro to CS with 3 credits
+schedon> print CSC101
+course CSC101 { title = "Intro to CS"; credits = 3; prerequisites = []; }
+schedon> 
+```
+
+### Script File Mode
+```bash
+java -cp . BYOL.Schedon schedule.schedon
+```
+
+Execute a complete Schedon program from a file (see example files below).
+
+## Usage Examples
+
+See the included `.schedon` example files for comprehensive demonstrations:
+- [basic_courses.schedon](basic_courses.schedon): Define courses, prerequisites, and majors
+- [student_schedule.schedon](student_schedule.schedon): Create students and their semester schedules
+- [university_curriculum.schedon](university_curriculum.schedon): Full university program with multiple majors
+
+**To run an example:**
+```bash
+java -cp . BYOL.Schedon basic_courses.schedon
+```
+
+### Quick Example
+```schedon
+// Define a course
+course CSC101 {
+  title = "Introduction to Computer Science";
+  credits = 3;
+  prerequisites = [];
 }
 
-course <id> {
-    title = "<course title>";
-    credits = <number>;
-    prerequisites = [<prereqId1>, <prereqId2>, ...];
+// Define a major
+major CompSci {
+  requiredCourses = [CSC101];
 }
 
-major <id> {
-    requiredCourses = [<courseId1>, <courseId2>, ...];
+// Create a student
+student s1 {
+  name = "John Doe";
+  major = CompSci;
+  credits = 0;
+  completedCourses = [];
 }
 
-semester <id> {
-    year = <year>;
-    term = <termName>;
-}
+// Print the student info
+print s1
+```
 
-print <identifier>;
+## Building and Testing
 
-Schedon Flow
-1. Add all available cources
-2. Add all Majors
-3. Add Student(Yourself)
-4. Add Semester
-5. Generate Schedules and simulate through college
+1. **Compile all Java files:**
+   ```bash
+   javac BYOL/*.java
+   ```
 
-Author:
-Nehemiah Simmons
-- GitHub: [@Nsimmons611](https://github.com/Nsimmons611)
-- Built as part of CSC 404 - Programming Languages course
+2. **Run in REPL mode:**
+   ```bash
+   java -cp . BYOL.Schedon
+   ```
+
+3. **Run a script file:**
+   ```bash
+   java -cp . BYOL.Schedon example.schedon
+   ```
+
+## Project Structure
+- `Schedon.java`: Main entry point and REPL implementation
+- `Scanner.java`: Lexical analyzer
+- `Parser.java`: Syntactic analyzer
+- `Interpreter.java`: Semantic analysis and execution engine
+- `Stmt.java`: AST node definitions
+- `Token.java`: Token representation
+- `TokenType.java`: Token type enumeration
+
+## Implementation Notes
+- The interpreter uses the Visitor pattern for AST traversal
+- Declarations are stored in a persistent environment HashMap
+- Prerequisites are validated lazily during schedule generation
+- The REPL maintains state across multiple commands
+- Script files produce output to stdout for each statement executed
